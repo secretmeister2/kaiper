@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://wbu6iy6jocem"]
+
+[ext_resource type="Script" path="res://kaiper.gd" id="1_otxy0"]
+[ext_resource type="Texture2D" uid="uid://cugjok5dpxpb0" path="res://gameassets/StandingSprite.png" id="2_oub11"]
+
+[node name="Kaiper" type="CharacterBody2D"]
+script = ExtResource("1_otxy0")
+
+[node name="KaiperSprite" type="Sprite2D" parent="."]
+rotation = 0.698132
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_oub11")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="NormalPhysColl" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-175, 4, -122, -40, -74, 52, 127, 88, 167, 231, -99.219, 231)
+
+[node name="StandPhysColl" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-18, 231, -138, -191, -35, -218, 121, 231)
+disabled = true
+
+[node name="CrouchPhysColl" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-129, 231, -97, 112, 187, 120, 223, 231)
+disabled = true
+
+[node name="CrouchtoWalkCollMon" type="Area2D" parent="."]
+
+[node name="CrouchtoWalk" type="CollisionPolygon2D" parent="CrouchtoWalkCollMon"]
+position = Vector2(354, -133)
+polygon = PackedVector2Array(-473, 313, -532, 136, -480, 91, -429, 179, -227, 222, -222, 248, -450, 242)
+disabled = true
+
+[node name="WalktoStandCollMon" type="Area2D" parent="."]
+
+[node name="WalktoStand" type="CollisionPolygon2D" parent="WalktoStandCollMon"]
+polygon = PackedVector2Array(-69, 47, -136, -191, -36, -215, 68, 76)
+
+[connection signal="body_entered" from="CrouchtoWalkCollMon" to="." method="CrouchToWalkCollides"]
+[connection signal="body_exited" from="CrouchtoWalkCollMon" to="." method="CourchToWalkUncollides"]
+[connection signal="body_entered" from="WalktoStandCollMon" to="." method="WalkToStandCollides"]
+[connection signal="body_exited" from="WalktoStandCollMon" to="." method="WalkToStandUncollides"]
