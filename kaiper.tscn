@@ -1,43 +1,139 @@
-[gd_scene load_steps=3 format=3 uid="uid://wbu6iy6jocem"]
+[gd_scene load_steps=6 format=3 uid="uid://wbu6iy6jocem"]
 
 [ext_resource type="Script" path="res://kaiper.gd" id="1_otxy0"]
 [ext_resource type="Texture2D" uid="uid://cugjok5dpxpb0" path="res://gameassets/StandingSprite.png" id="2_oub11"]
 
+[sub_resource type="Animation" id="Animation_gix2i"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KaiperSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_ybqys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KaiperSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_oub11")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KaiperSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hhr4c"]
+_data = {
+"RESET": SubResource("Animation_ybqys"),
+"walk": SubResource("Animation_gix2i")
+}
+
 [node name="Kaiper" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 19
 script = ExtResource("1_otxy0")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="KaiperSprite" type="Sprite2D" parent="."]
-rotation = 0.698132
 scale = Vector2(0.18, 0.18)
 texture = ExtResource("2_oub11")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hhr4c")
+}
 
 [node name="NormalPhysColl" type="CollisionPolygon2D" parent="."]
-build_mode = 1
 polygon = PackedVector2Array(-175, 4, -122, -40, -74, 52, 127, 88, 167, 231, -99.219, 231)
 
 [node name="StandPhysColl" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-18, 231, -138, -191, -35, -218, 121, 231)
+polygon = PackedVector2Array(-18, 231, -100, -167, -35, -218, 121, 231)
 disabled = true
 
 [node name="CrouchPhysColl" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-129, 231, -97, 112, 187, 120, 223, 231)
+position = Vector2(-48, 0)
+polygon = PackedVector2Array(-109, 230, -92, 113, 187, 120, 223, 231)
 disabled = true
 
-[node name="CrouchtoWalkCollMon" type="Area2D" parent="."]
+[node name="PickupArea" type="Area2D" parent="."]
 
-[node name="CrouchtoWalk" type="CollisionPolygon2D" parent="CrouchtoWalkCollMon"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PickupArea"]
+polygon = PackedVector2Array(-161, 190, -122, 226, -89, 200, -137, 156)
+
+[node name="StanceCancels" type="Node" parent="."]
+
+[node name="WalktoCrouchCollMon" type="Area2D" parent="StanceCancels"]
+collision_layer = 8
+collision_mask = 19
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StanceCancels/WalktoCrouchCollMon"]
+visible = false
+position = Vector2(-330, -2)
+polygon = PackedVector2Array(155, 233, 225, 231, 189, 119)
+
+[node name="StandtoWalkCollMon" type="Area2D" parent="StanceCancels"]
+collision_layer = 8
+collision_mask = 19
+
+[node name="StandtoWalk" type="CollisionPolygon2D" parent="StanceCancels/StandtoWalkCollMon"]
+visible = false
+position = Vector2(-3, -2)
+polygon = PackedVector2Array(-179, 4, -126, -44, -75, 43, -120, 183)
+
+[node name="StandtoWalk2" type="CollisionPolygon2D" parent="StanceCancels/StandtoWalkCollMon"]
+visible = false
+position = Vector2(346, -10)
+polygon = PackedVector2Array(-274, 88, -217, 99, -181, 238, -223, 239)
+
+[node name="WalktoStandCollMon" type="Area2D" parent="StanceCancels"]
+collision_layer = 8
+collision_mask = 19
+
+[node name="WalktoStand" type="CollisionPolygon2D" parent="StanceCancels/WalktoStandCollMon"]
+visible = false
+polygon = PackedVector2Array(-56, 48, -100, -166, -36, -215, 68, 76)
+
+[node name="CrouchtoWalkCollMon" type="Area2D" parent="StanceCancels"]
+collision_layer = 8
+collision_mask = 19
+
+[node name="CrouchtoWalk" type="CollisionPolygon2D" parent="StanceCancels/CrouchtoWalkCollMon"]
+visible = false
 position = Vector2(354, -133)
-polygon = PackedVector2Array(-473, 313, -532, 136, -480, 91, -429, 179, -227, 222, -222, 248, -450, 242)
+polygon = PackedVector2Array(-494, 242, -532, 136, -480, 91, -429, 179, -227, 222, -222, 248, -450, 242)
 disabled = true
 
-[node name="WalktoStandCollMon" type="Area2D" parent="."]
-
-[node name="WalktoStand" type="CollisionPolygon2D" parent="WalktoStandCollMon"]
-polygon = PackedVector2Array(-69, 47, -136, -191, -36, -215, 68, 76)
-
-[connection signal="body_entered" from="CrouchtoWalkCollMon" to="." method="CrouchToWalkCollides"]
-[connection signal="body_exited" from="CrouchtoWalkCollMon" to="." method="CourchToWalkUncollides"]
-[connection signal="body_entered" from="WalktoStandCollMon" to="." method="WalkToStandCollides"]
-[connection signal="body_exited" from="WalktoStandCollMon" to="." method="WalkToStandUncollides"]
+[connection signal="body_entered" from="StanceCancels/WalktoCrouchCollMon" to="." method="WalkToCrouchCollides"]
+[connection signal="body_exited" from="StanceCancels/WalktoCrouchCollMon" to="." method="WalktoCrouchUncollides"]
+[connection signal="body_entered" from="StanceCancels/StandtoWalkCollMon" to="." method="StandtoWalkCollides"]
+[connection signal="body_exited" from="StanceCancels/StandtoWalkCollMon" to="." method="StandtoWalkUncollides"]
+[connection signal="body_entered" from="StanceCancels/WalktoStandCollMon" to="." method="WalkToStandCollides"]
+[connection signal="body_exited" from="StanceCancels/WalktoStandCollMon" to="." method="WalkToStandUncollides"]
+[connection signal="body_entered" from="StanceCancels/CrouchtoWalkCollMon" to="." method="CrouchToWalkCollides"]
+[connection signal="body_exited" from="StanceCancels/CrouchtoWalkCollMon" to="." method="CourchToWalkUncollides"]

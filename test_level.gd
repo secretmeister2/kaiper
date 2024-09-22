@@ -37,7 +37,3 @@ func vertjumpchanged(value: float) -> void:
 
 func frictionchanged(value: float) -> void:
 	$Kaiper.friction=value
-
-
-func gravitychanged(value: float) -> void:
-	$Kaiper.gravity=value

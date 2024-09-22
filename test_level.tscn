@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0nkmoxqxumsn"]
+[gd_scene load_steps=8 format=3 uid="uid://b0nkmoxqxumsn"]
 
 [ext_resource type="PackedScene" uid="uid://wbu6iy6jocem" path="res://kaiper.tscn" id="1_02p4t"]
 [ext_resource type="Script" path="res://test_level.gd" id="1_7a7ch"]
@@ -6,7 +6,13 @@
 [ext_resource type="Script" path="res://addons/SliderLabel/SliderLabel.gd" id="3_frg3u"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_owxyh"]
-friction = 0.5
+friction = 0.9
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dm0ed"]
+friction = 0.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i2n07"]
+radius = 36.0555
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_7a7ch")
@@ -25,36 +31,40 @@ texture = ExtResource("2_kqxel")
 
 [node name="CragRight" type="StaticBody2D" parent="Collision"]
 position = Vector2(4552, 10728)
+collision_mask = 31
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CragRight"]
 position = Vector2(-136, -218)
-polygon = PackedVector2Array(-2630, -9230, -2940, -9208, -3038, -9121, -2668, -9199)
+polygon = PackedVector2Array(-2630, -9230, -2929, -9212, -2920, -9178, -2635, -9192)
 one_way_collision = true
-one_way_collision_margin = 2.0
+one_way_collision_margin = 20.0
 
 [node name="CliffUpper" type="StaticBody2D" parent="Collision"]
 position = Vector2(2276, 5364)
+collision_mask = 31
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CliffUpper"]
 position = Vector2(-136, -218)
-polygon = PackedVector2Array(-1093, -4870, -554, -5007, -549, -4988, -1078, -4854)
+polygon = PackedVector2Array(-1093, -4870, -554, -5007, -544, -4957, -1086, -4820)
 one_way_collision = true
-one_way_collision_margin = 2.0
+one_way_collision_margin = 20.0
 
 [node name="CliffLower" type="StaticBody2D" parent="Collision"]
 position = Vector2(1138, 2682)
+collision_mask = 31
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CliffLower"]
 position = Vector2(-136, -218)
-polygon = PackedVector2Array(-434, -1648, -219, -1660, 53, -1616, 70, -1603, -217, -1635, -474, -1611)
+polygon = PackedVector2Array(-434, -1648, -219, -1660, 53, -1616, 70, -1603, -474, -1611)
 one_way_collision = true
-one_way_collision_margin = 2.0
+one_way_collision_margin = 20.0
 
 [node name="Floor" type="StaticBody2D" parent="Collision"]
 position = Vector2(1264, 720)
+collision_mask = 31
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Floor"]
@@ -64,6 +74,7 @@ polygon = PackedVector2Array(-979, 1401, -965, 1203, 1049, 1197, 1038, 1398)
 
 [node name="Mush" type="StaticBody2D" parent="Collision"]
 position = Vector2(569, 1341)
+collision_mask = 31
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Mush"]
@@ -71,40 +82,6 @@ position = Vector2(-136, -218)
 polygon = PackedVector2Array(45, 148, 161, 167, 306, 247, 41, 181, -252, 223, -210, 173)
 
 [node name="Sliders" type="Node" parent="."]
-
-[node name="Gravity" type="HSlider" parent="Sliders"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 69.0
-offset_top = 268.0
-offset_right = 627.0
-offset_bottom = 304.0
-grow_vertical = 2
-step = 5.0
-value = 40.0
-tick_count = 11
-
-[node name="SliderLabel" type="Label" parent="Sliders/Gravity"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
-
-[node name="Label" type="Label" parent="Sliders/Gravity"]
-layout_mode = 0
-offset_left = -4.0
-offset_top = -32.0
-offset_right = 109.0
-offset_bottom = -9.0
-text = "Gravity (higher = more)"
 
 [node name="Friction" type="HSlider" parent="Sliders"]
 anchors_preset = 4
@@ -347,7 +324,16 @@ script = ExtResource("3_frg3u")
 custom_slider_path = NodePath("..")
 metadata/_edit_initialized_ = true
 
-[connection signal="value_changed" from="Sliders/Gravity" to="." method="gravitychanged"]
+[node name="Ball" type="RigidBody2D" parent="." groups=["PickupableObjects"]]
+collision_layer = 4
+collision_mask = 7
+mass = 0.4
+physics_material_override = SubResource("PhysicsMaterial_dm0ed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(1649, 1248)
+shape = SubResource("CircleShape2D_i2n07")
+
 [connection signal="value_changed" from="Sliders/Friction" to="." method="frictionchanged"]
 [connection signal="value_changed" from="Sliders/VertJump" to="." method="vertjumpchanged"]
 [connection signal="value_changed" from="Sliders/HorzJumpVert" to="." method="horzjumpvertchanged"]
