@@ -162,7 +162,7 @@ func find(parent, type):
 	return null
 
 func CrouchToWalkCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && (not body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
+	if not (body.get_parent() is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
 		noupwalk.append(body)
 	if is_instance_of(body, RigidBody2D):
 		noupwalk.append(body)
@@ -171,7 +171,7 @@ func CourchToWalkUncollides(body: Node2D) -> void:
 		noupwalk.erase(body)
 	
 func WalkToStandCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && (not body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
+	if not (body.get_parent() is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
 		nostand.append(body)
 	if is_instance_of(body, RigidBody2D):
 		nostand.append(body)
@@ -180,7 +180,7 @@ func WalkToStandUncollides(body: Node2D) -> void:
 		nostand.erase(body)
 
 func StandtoWalkCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && (not body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
+	if not (body.get_parent() is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
 		nodownwalk.append(body)
 	if is_instance_of(body, RigidBody2D):
 		nodownwalk.append(body)
@@ -189,7 +189,7 @@ func StandtoWalkUncollides(body: Node2D) -> void:
 		nodownwalk.erase(body)
 
 func WalkToCrouchCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && (not body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
+	if not (body.get_parent() is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
 		nocrouch.append(body)
 	if is_instance_of(body, RigidBody2D):
 		nocrouch.append(body)
