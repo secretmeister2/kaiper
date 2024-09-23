@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0nkmoxqxumsn"]
+[gd_scene load_steps=9 format=3 uid="uid://b0nkmoxqxumsn"]
 
 [ext_resource type="PackedScene" uid="uid://wbu6iy6jocem" path="res://kaiper.tscn" id="1_02p4t"]
 [ext_resource type="Script" path="res://test_level.gd" id="1_7a7ch"]
 [ext_resource type="Texture2D" uid="uid://crafs1rrvf07c" path="res://gameassets/Demo Level_ With Kaiper.png" id="2_kqxel"]
 [ext_resource type="Script" path="res://addons/SliderLabel/SliderLabel.gd" id="3_frg3u"]
+[ext_resource type="Texture2D" uid="uid://hf6g5ohnjnmi" path="res://addons/MetroidvaniaSystem/Themes/RR/Symbols/Egg.png" id="5_es225"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_owxyh"]
 friction = 0.9
@@ -31,7 +32,7 @@ texture = ExtResource("2_kqxel")
 
 [node name="CragRight" type="StaticBody2D" parent="Collision"]
 position = Vector2(4552, 10728)
-collision_mask = 31
+collision_mask = 30
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CragRight"]
@@ -42,7 +43,7 @@ one_way_collision_margin = 20.0
 
 [node name="CliffUpper" type="StaticBody2D" parent="Collision"]
 position = Vector2(2276, 5364)
-collision_mask = 31
+collision_mask = 30
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CliffUpper"]
@@ -53,7 +54,7 @@ one_way_collision_margin = 20.0
 
 [node name="CliffLower" type="StaticBody2D" parent="Collision"]
 position = Vector2(1138, 2682)
-collision_mask = 31
+collision_mask = 30
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CliffLower"]
@@ -64,7 +65,7 @@ one_way_collision_margin = 20.0
 
 [node name="Floor" type="StaticBody2D" parent="Collision"]
 position = Vector2(1264, 720)
-collision_mask = 31
+collision_mask = 30
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Floor"]
@@ -74,7 +75,7 @@ polygon = PackedVector2Array(-979, 1401, -965, 1203, 1049, 1197, 1038, 1398)
 
 [node name="Mush" type="StaticBody2D" parent="Collision"]
 position = Vector2(569, 1341)
-collision_mask = 31
+collision_mask = 30
 physics_material_override = SubResource("PhysicsMaterial_owxyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Mush"]
@@ -95,19 +96,6 @@ grow_vertical = 2
 max_value = 200.0
 value = 10.0
 tick_count = 21
-
-[node name="SliderLabel" type="Label" parent="Sliders/Friction"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
 
 [node name="Label" type="Label" parent="Sliders/Friction"]
 layout_mode = 0
@@ -130,19 +118,6 @@ max_value = 24.0
 step = 0.5
 value = 13.0
 tick_count = 25
-
-[node name="SliderLabel" type="Label" parent="Sliders/VertJump"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
 
 [node name="Label" type="Label" parent="Sliders/VertJump"]
 layout_mode = 0
@@ -201,19 +176,6 @@ step = 0.1
 value = 2.0
 tick_count = 11
 
-[node name="SliderLabel" type="Label" parent="Sliders/HorzJumpMult"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
-
 [node name="Label" type="Label" parent="Sliders/HorzJumpMult"]
 layout_mode = 0
 offset_left = -4.0
@@ -235,19 +197,6 @@ max_value = 50.0
 value = 20.0
 tick_count = 11
 
-[node name="SliderLabel" type="Label" parent="Sliders/StandSlider"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
-
 [node name="Label" type="Label" parent="Sliders/StandSlider"]
 layout_mode = 0
 offset_left = -4.0
@@ -268,19 +217,6 @@ grow_vertical = 2
 max_value = 50.0
 value = 20.0
 tick_count = 11
-
-[node name="SliderLabel" type="Label" parent="Sliders/RunSlider"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
 
 [node name="Label" type="Label" parent="Sliders/RunSlider"]
 layout_mode = 0
@@ -311,28 +247,19 @@ offset_right = 109.0
 offset_bottom = -9.0
 text = "Walking Speed"
 
-[node name="SliderLabel" type="Label" parent="Sliders/WalkSlider"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 24.0
-offset_right = 45.0
-offset_bottom = 47.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
-metadata/_edit_initialized_ = true
-
 [node name="Ball" type="RigidBody2D" parent="." groups=["PickupableObjects"]]
+disable_mode = 1
 collision_layer = 4
-collision_mask = 7
+collision_mask = 39
 mass = 0.4
 physics_material_override = SubResource("PhysicsMaterial_dm0ed")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 position = Vector2(1649, 1248)
 shape = SubResource("CircleShape2D_i2n07")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball/CollisionShape2D"]
+texture = ExtResource("5_es225")
 
 [connection signal="value_changed" from="Sliders/Friction" to="." method="frictionchanged"]
 [connection signal="value_changed" from="Sliders/VertJump" to="." method="vertjumpchanged"]
