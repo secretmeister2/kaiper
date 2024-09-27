@@ -23,7 +23,6 @@ var xvelpast = 0
 
 var heldobject = 0
 var heldparent = 0
-var heldpos=Vector2(0,0)
 var heldvel=Vector2(0,0)
 
 var walkingsheet = preload("res://gameassets/KAIPER SPRITE SHEET.png")
@@ -153,22 +152,24 @@ func _physics_process(delta: float) -> void:
 	set_rotation_degrees(180)
 ##Held object manipulation
 	if Input.is_action_just_pressed("pickup") && not (heldobject is RigidBody2D):
+		print("tryhold")
 		for body in $PickupArea.get_overlapping_bodies():
+			print(body.is_in_group("PickupableObjects"))
+			print(body.is_in_group("PickupableObjects") && not (heldobject is RigidBody2D))
 			if body.is_in_group("PickupableObjects") && not (heldobject is RigidBody2D):
 				heldobject = body
-				heldparent=heldobject.get_parent()
-				heldobject.reparent(self)
-				heldobject.freeze = true
+				heldobject.freeze=true
 	elif Input.is_action_just_pressed("pickup") && heldobject is RigidBody2D:
-		heldpos = heldobject.get_global_position()
 		heldvel=velocity
-		heldobject.freeze = false
-		heldobject.reparent(heldparent)
 		heldobject.reset_physics_interpolation()
-		heldobject.position = heldpos
+		heldobject.freeze=false
+		heldobject.set_global_position(Vector2(facingdir*-140, 30) + self.get_global_position())
 		heldobject.apply_central_impulse(0.4*heldvel)
 		heldobject=0
-		
+	elif heldobject is RigidBody2D:
+		heldobject.reset_physics_interpolation()
+		heldobject.set_global_position(Vector2(facingdir*-140, 30) + self.get_global_position())
+
 	##animations
 	##if abs(velocity.x) > 5 && stance == 1 && $AnimationPlayer.current_animation != &"walk":
 	##	$AnimationPlayer.play(&"walk")

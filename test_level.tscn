@@ -1,27 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0nkmoxqxumsn"]
+[gd_scene load_steps=7 format=3 uid="uid://b0nkmoxqxumsn"]
 
 [ext_resource type="PackedScene" uid="uid://wbu6iy6jocem" path="res://kaiper.tscn" id="1_02p4t"]
 [ext_resource type="Script" path="res://test_level.gd" id="1_7a7ch"]
 [ext_resource type="Texture2D" uid="uid://crafs1rrvf07c" path="res://gameassets/Demo Level_ With Kaiper.png" id="2_kqxel"]
 [ext_resource type="Script" path="res://addons/SliderLabel/SliderLabel.gd" id="3_frg3u"]
-[ext_resource type="Texture2D" uid="uid://hf6g5ohnjnmi" path="res://addons/MetroidvaniaSystem/Themes/RR/Symbols/Egg.png" id="5_es225"]
+[ext_resource type="PackedScene" uid="uid://bb41nbfahcf2i" path="res://ball.tscn" id="4_p3wlw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_owxyh"]
 friction = 0.9
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dm0ed"]
-friction = 0.6
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_i2n07"]
-radius = 36.0555
-
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_7a7ch")
-
-[node name="Kaiper" parent="." instance=ExtResource("1_02p4t")]
-z_index = 2
-position = Vector2(1056, 1200)
-scale = Vector2(1.1, 1.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -3
@@ -247,19 +236,11 @@ offset_right = 109.0
 offset_bottom = -9.0
 text = "Walking Speed"
 
-[node name="Ball" type="RigidBody2D" parent="." groups=["PickupableObjects"]]
-disable_mode = 1
-collision_layer = 4
-collision_mask = 39
-mass = 0.4
-physics_material_override = SubResource("PhysicsMaterial_dm0ed")
+[node name="Ball" parent="." instance=ExtResource("4_p3wlw")]
+position = Vector2(1634, 1225)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-position = Vector2(1649, 1248)
-shape = SubResource("CircleShape2D_i2n07")
-
-[node name="Sprite2D" type="Sprite2D" parent="Ball/CollisionShape2D"]
-texture = ExtResource("5_es225")
+[node name="Kaiper" parent="." instance=ExtResource("1_02p4t")]
+position = Vector2(1151, 1444)
 
 [connection signal="value_changed" from="Sliders/Friction" to="." method="frictionchanged"]
 [connection signal="value_changed" from="Sliders/VertJump" to="." method="vertjumpchanged"]
