@@ -152,23 +152,31 @@ func _physics_process(delta: float) -> void:
 	set_rotation_degrees(180)
 ##Held object manipulation
 	if Input.is_action_just_pressed("pickup") && not (heldobject is RigidBody2D):
-		print("tryhold")
 		for body in $PickupArea.get_overlapping_bodies():
-			print(body.is_in_group("PickupableObjects"))
-			print(body.is_in_group("PickupableObjects") && not (heldobject is RigidBody2D))
+
 			if body.is_in_group("PickupableObjects") && not (heldobject is RigidBody2D):
 				heldobject = body
 				heldobject.freeze=true
 	elif Input.is_action_just_pressed("pickup") && heldobject is RigidBody2D:
 		heldvel=velocity
-		heldobject.reset_physics_interpolation()
 		heldobject.freeze=false
-		heldobject.set_global_position(Vector2(facingdir*-140, 30) + self.get_global_position())
+		heldobject.reset_physics_interpolation()
+		print("interp")
+		print(heldobject.get_global_position())
+		print(Vector2(facingdir*-210, 50) + self.get_global_position())
+		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
+		print("telp")
+		print(heldobject.get_global_position())
+		print(Vector2(facingdir*-210, 50) + self.get_global_position())
 		heldobject.apply_central_impulse(0.4*heldvel)
+		print("imp")
+		print(heldobject.get_global_position())
+		print(Vector2(facingdir*-210, 50) + self.get_global_position())
 		heldobject=0
 	elif heldobject is RigidBody2D:
 		heldobject.reset_physics_interpolation()
-		heldobject.set_global_position(Vector2(facingdir*-140, 30) + self.get_global_position())
+		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
+		print(heldobject.get_global_position())
 
 	##animations
 	##if abs(velocity.x) > 5 && stance == 1 && $AnimationPlayer.current_animation != &"walk":
