@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb41nbfahcf2i"]
 
-[ext_resource type="Texture2D" uid="uid://hf6g5ohnjnmi" path="res://addons/MetroidvaniaSystem/Themes/RR/Symbols/Egg.png" id="1_0o775"]
+[ext_resource type="Texture2D" uid="uid://bhnmj6tnfdqmi" path="res://gameassets/HeckerSpellFocusItem.png" id="1_i80xc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3v6a5"]
 radius = 36.0555
 
-[node name="Ball" type="RigidBody2D" groups=["PickupableObjects"]]
+[node name="HeckerFocus" type="RigidBody2D" groups=["PickupableObjects"]]
 disable_mode = 1
 collision_layer = 4
 collision_mask = 39
@@ -15,4 +15,6 @@ mass = 0.4
 shape = SubResource("CircleShape2D_3v6a5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_0o775")
+position = Vector2(1, -2)
+scale = Vector2(0.04075, 0.04075)
+texture = ExtResource("1_i80xc")

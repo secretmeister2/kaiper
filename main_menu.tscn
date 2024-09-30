@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://8x8rhshf11pk"]
+[gd_scene load_steps=2 format=3 uid="uid://8x8rhshf11pk"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_hqdu7"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -7,8 +9,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hqdu7")
 
-[node name="Start" type="Button" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="TestStart" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -237.0
+offset_right = 122.0
+offset_bottom = -165.0
+text = "TestWorld"
+
+[connection signal="pressed" from="TestStart" to="." method="teststart"]

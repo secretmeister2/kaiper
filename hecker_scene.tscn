@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq8tfv58278sp"]
+
+[ext_resource type="PackedScene" uid="uid://bb41nbfahcf2i" path="res://ball.tscn" id="1_kkw4n"]
+[ext_resource type="PackedScene" uid="uid://wbu6iy6jocem" path="res://kaiper.tscn" id="2_f7pwg"]
+[ext_resource type="Texture2D" uid="uid://cftw10syvlv30" path="res://gameassets/HeckerBackground.png" id="3_teupq"]
+[ext_resource type="Texture2D" uid="uid://daokepxp35nww" path="res://gameassets/HeckerSitOnRock.png" id="4_hlxu5"]
+
+[node name="HeckerScene" type="Node2D"]
+
+[node name="HeckerFocus" parent="." instance=ExtResource("1_kkw4n")]
+position = Vector2(364, 2064)
+
+[node name="Kaiper" parent="." instance=ExtResource("2_f7pwg")]
+z_index = 1
+position = Vector2(2391, 1936)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1606.9, 1208)
+scale = Vector2(1.194, 1.194)
+texture = ExtResource("3_teupq")
+
+[node name="Hecker" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Hecker"]
+position = Vector2(1866, 1831)
+scale = Vector2(0.2215, 0.2215)
+texture = ExtResource("4_hlxu5")

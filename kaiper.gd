@@ -116,7 +116,6 @@ func _physics_process(delta: float) -> void:
 		$KaiperSprite.set_offset(Vector2(0, 450))
 		##$KaiperSprite.scale = Vector2(1, 1)
 
-	
 	if standtimer > 0:
 		standtimer -= 1 
 	if jumptimer > 0:
@@ -153,7 +152,6 @@ func _physics_process(delta: float) -> void:
 ##Held object manipulation
 	if Input.is_action_just_pressed("pickup") && not (heldobject is RigidBody2D):
 		for body in $PickupArea.get_overlapping_bodies():
-
 			if body.is_in_group("PickupableObjects") && not (heldobject is RigidBody2D):
 				heldobject = body
 				heldobject.freeze=true
@@ -161,22 +159,13 @@ func _physics_process(delta: float) -> void:
 		heldvel=velocity
 		heldobject.freeze=false
 		heldobject.reset_physics_interpolation()
-		print("interp")
-		print(heldobject.get_global_position())
-		print(Vector2(facingdir*-210, 50) + self.get_global_position())
+		heldobject.get_global_position()
 		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
-		print("telp")
-		print(heldobject.get_global_position())
-		print(Vector2(facingdir*-210, 50) + self.get_global_position())
 		heldobject.apply_central_impulse(0.4*heldvel)
-		print("imp")
-		print(heldobject.get_global_position())
-		print(Vector2(facingdir*-210, 50) + self.get_global_position())
 		heldobject=0
 	elif heldobject is RigidBody2D:
 		heldobject.reset_physics_interpolation()
 		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
-		print(heldobject.get_global_position())
 
 	##animations
 	##if abs(velocity.x) > 5 && stance == 1 && $AnimationPlayer.current_animation != &"walk":
@@ -229,4 +218,4 @@ func WalktoCrouchUncollides(body: Node2D) -> void:
 		nocrouch.erase(body)
 
 
-##NOTES FOR WHAT DO NEXT: Ledge grab, fix landing on one ways, fix dropping obejcts vanishing, snap held object position to mouth
+##NOTES FOR WHAT DO NEXT: Ledge grab, fix landing on one ways
