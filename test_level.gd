@@ -36,3 +36,6 @@ func vertjumpchanged(value: float) -> void:
 
 func frictionchanged(value: float) -> void:
 	$Kaiper.friction=value
+
+func KaiperEnteredHeck(body: Node2D) -> void:
+	Dialogic.start("heckertest")

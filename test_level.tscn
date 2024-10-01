@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0nkmoxqxumsn"]
+[gd_scene load_steps=8 format=3 uid="uid://b0nkmoxqxumsn"]
 
 [ext_resource type="PackedScene" uid="uid://wbu6iy6jocem" path="res://kaiper.tscn" id="1_02p4t"]
 [ext_resource type="Script" path="res://test_level.gd" id="1_7a7ch"]
 [ext_resource type="Texture2D" uid="uid://crafs1rrvf07c" path="res://gameassets/Demo Level_ With Kaiper.png" id="2_kqxel"]
-[ext_resource type="Script" path="res://addons/SliderLabel/SliderLabel.gd" id="3_frg3u"]
+[ext_resource type="Texture2D" uid="uid://cftw10syvlv30" path="res://gameassets/HeckerBackground.png" id="3_lw312"]
 [ext_resource type="PackedScene" uid="uid://bb41nbfahcf2i" path="res://ball.tscn" id="4_p3wlw"]
+[ext_resource type="PackedScene" uid="uid://clqawldwwp03d" path="res://hecker.tscn" id="7_gbl17"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_owxyh"]
 friction = 0.9
@@ -12,10 +13,14 @@ friction = 0.9
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_7a7ch")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Rock" type="Sprite2D" parent="."]
 z_index = -3
 position = Vector2(1162, 554)
 texture = ExtResource("2_kqxel")
+
+[node name="Forest" type="Sprite2D" parent="."]
+position = Vector2(3511, 902)
+texture = ExtResource("3_lw312")
 
 [node name="Collision" type="Node" parent="."]
 
@@ -60,7 +65,7 @@ physics_material_override = SubResource("PhysicsMaterial_owxyh")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Floor"]
 physics_interpolation_mode = 1
 position = Vector2(-136, -218)
-polygon = PackedVector2Array(-979, 1401, -965, 1203, 1049, 1197, 1038, 1398)
+polygon = PackedVector2Array(-979, 1401, -965, 1203, 3744, 1203, 3744, 1401)
 
 [node name="Mush" type="StaticBody2D" parent="Collision"]
 position = Vector2(569, 1341)
@@ -139,8 +144,6 @@ offset_bottom = 47.0
 size_flags_horizontal = 4
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("3_frg3u")
-custom_slider_path = NodePath("..")
 metadata/_edit_initialized_ = true
 
 [node name="Label" type="Label" parent="Sliders/HorzJumpVert"]
@@ -236,11 +239,14 @@ offset_right = 109.0
 offset_bottom = -9.0
 text = "Walking Speed"
 
-[node name="Ball" parent="." instance=ExtResource("4_p3wlw")]
+[node name="HeckerFocus" parent="." instance=ExtResource("4_p3wlw")]
 position = Vector2(1634, 1225)
 
 [node name="Kaiper" parent="." instance=ExtResource("1_02p4t")]
 position = Vector2(1151, 1444)
+
+[node name="Hecker" parent="." instance=ExtResource("7_gbl17")]
+position = Vector2(3811, 1415)
 
 [connection signal="value_changed" from="Sliders/Friction" to="." method="frictionchanged"]
 [connection signal="value_changed" from="Sliders/VertJump" to="." method="vertjumpchanged"]
@@ -249,3 +255,4 @@ position = Vector2(1151, 1444)
 [connection signal="value_changed" from="Sliders/StandSlider" to="." method="standspeedchanged"]
 [connection signal="value_changed" from="Sliders/RunSlider" to="." method="runspeedchanged"]
 [connection signal="value_changed" from="Sliders/WalkSlider" to="." method="walkspeedchanged"]
+[connection signal="KaiperEnteredHeck" from="Hecker" to="." method="KaiperEnteredHeck"]
