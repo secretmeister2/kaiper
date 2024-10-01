@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://clqawldwwp03d"]
+
+[ext_resource type="Texture2D" uid="uid://daokepxp35nww" path="res://gameassets/HeckerSitOnRock.png" id="1_kquma"]
+[ext_resource type="Script" path="res://hecker.gd" id="1_t3n7k"]
+
+[node name="Hecker" type="Node2D"]
+script = ExtResource("1_t3n7k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.00001, 0.999977)
+scale = Vector2(0.223, 0.223)
+texture = ExtResource("1_kquma")
+
+[node name="KaiperDetect" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KaiperDetect"]
+position = Vector2(25, -18)
+polygon = PackedVector2Array(823, 58, 823, 321, -691, 313, -690, 50)
