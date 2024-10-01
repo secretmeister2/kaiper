@@ -1,0 +1,37 @@
+if {HeckerWaitingForFocus} == true:
+	jump Waiting
+else:
+	hecker: Oh, hello there.
+	if {HeldObject} == "HeckerFocus":
+		hecker: I lost my-[aa=0.05]
+		hecker: Oh! Thats my spell focus... can I have it back? Its really important to me...
+		if {HeldObject} != "HeckerFocus":
+			jump heckertest/Given
+		else:
+			[wait time="1.5"]
+			if {HeldObject} != "HeckerFocus":
+				jump heckertest/Given
+			else:
+				hecker: Please?[pause=0.5]
+				[wait time="1.5"]
+				if {HeldObject} != "HeckerFocus":
+					jump heckertest/Given
+				else:
+					hecker: Fine then! Keep it for all I care...
+	elif {HeldObject} == "none":
+		hecker: I lost my spell focus... would you mind looking around for one? I would really appreciate it.
+		set {HeckerWaitingForFocus} = true
+		[wait time="1.0"]
+		hecker: I think its over to the left...
+		[wait time="1.5"]
+		hecker: What are you waiting for?
+[end_timeline]
+label Given (Given)
+[signal arg="heckerpickupfocus"]
+hecker: Thank you! Would you like to come meet my friends?
+[end_timeline]
+label Waiting
+if {HeldObject} == "HeckerFocus":
+	hecker: Thank you! Could you bring it to me?
+else:
+	hecker: Did you not manage to find it?

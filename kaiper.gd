@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func ready() -> void:
-	pass
+	Dialogic.VAR.HeldObject="none"
+
 
 var crouchspeed = 5
 var standspeed = 5
@@ -21,8 +22,7 @@ var jumptimer = 0
 var facingdir = 1
 var xvelpast = 0
 
-var heldobject = 0
-var heldparent = 0
+var heldobject = "none"
 var heldvel=Vector2(0,0)
 
 var walkingsheet = preload("res://gameassets/KAIPER SPRITE SHEET.png")
@@ -155,6 +155,7 @@ func _physics_process(delta: float) -> void:
 			if body.is_in_group("PickupableObjects") && not (heldobject is RigidBody2D):
 				heldobject = body
 				heldobject.freeze=true
+				Dialogic.VAR.HeldObject=body.get_name().erase(0, 0)
 	elif Input.is_action_just_pressed("pickup") && heldobject is RigidBody2D:
 		heldvel=velocity
 		heldobject.freeze=false
@@ -162,11 +163,12 @@ func _physics_process(delta: float) -> void:
 		heldobject.get_global_position()
 		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
 		heldobject.apply_central_impulse(0.4*heldvel)
-		heldobject=0
+		heldobject="none"
+		Dialogic.VAR.HeldObject="none"
 	elif heldobject is RigidBody2D:
 		heldobject.reset_physics_interpolation()
 		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
-
+	print(Dialogic.VAR.HeldObject)
 	##animations
 	##if abs(velocity.x) > 5 && stance == 1 && $AnimationPlayer.current_animation != &"walk":
 	##	$AnimationPlayer.play(&"walk")

@@ -239,7 +239,7 @@ offset_right = 109.0
 offset_bottom = -9.0
 text = "Walking Speed"
 
-[node name="Ball" parent="." instance=ExtResource("4_p3wlw")]
+[node name="HeckerFocus" parent="." instance=ExtResource("4_p3wlw")]
 position = Vector2(1634, 1225)
 
 [node name="Kaiper" parent="." instance=ExtResource("1_02p4t")]
@@ -255,3 +255,4 @@ position = Vector2(3811, 1415)
 [connection signal="value_changed" from="Sliders/StandSlider" to="." method="standspeedchanged"]
 [connection signal="value_changed" from="Sliders/RunSlider" to="." method="runspeedchanged"]
 [connection signal="value_changed" from="Sliders/WalkSlider" to="." method="walkspeedchanged"]
+[connection signal="KaiperEnteredHeck" from="Hecker" to="." method="KaiperEnteredHeck"]
