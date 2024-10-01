@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 
 
 func KaiperEntered(body: Node2D) -> void:
-	Dialogic.start("heckertest")
+	if Dialogic.current_timeline == null:
+		Dialogic.start("heckertest")
