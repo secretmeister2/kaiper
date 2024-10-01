@@ -2,27 +2,27 @@
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
 "_translation_id": "",
-"color": Color(1, 1, 1, 1),
+"color": Color(0, 0, 0, 1),
 "custom_info": {
 "sound_mood_default": "",
 "sound_moods": {},
-"style": ""
+"style": "bubbletext"
 },
-"default_portrait": "New portrait",
-"description": "",
-"display_name": "hecker",
+"default_portrait": "Base",
+"description": "A luxan mage far from home",
+"display_name": "Hecker",
 "mirror": false,
-"nicknames": [""],
+"nicknames": ["Heck"],
 "offset": Vector2(0, 0),
 "portraits": {
-"New portrait": {
+"Base": {
 "export_overrides": {
 "image": "\"res://gameassets/HeckerSitOnRock.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
-"scene": ""
+"scene": "res://hecker.tscn"
 }
 },
 "scale": 1.0

@@ -255,4 +255,3 @@ position = Vector2(3811, 1415)
 [connection signal="value_changed" from="Sliders/StandSlider" to="." method="standspeedchanged"]
 [connection signal="value_changed" from="Sliders/RunSlider" to="." method="runspeedchanged"]
 [connection signal="value_changed" from="Sliders/WalkSlider" to="." method="walkspeedchanged"]
-[connection signal="KaiperEnteredHeck" from="Hecker" to="." method="KaiperEnteredHeck"]

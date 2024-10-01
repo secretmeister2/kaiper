@@ -32,10 +32,12 @@ directories/dch_directory={
 directories/dtl_directory={
 "heckertest": "res://dialogicdata/heckertest.dtl"
 }
-layout/style_list=[]
-layout/default_style="Default"
+layout/style_list=["res://bubbletext.tres"]
+layout/default_style="res://bubbletext.tres"
 variables={
-"HeckerWaitingForFocus": false,
+"Hecker": {
+"HeckerWaitingForFocus": false
+},
 "HeldObject": ""
 }
 glossary/default_case_sensitive=true
@@ -43,7 +45,7 @@ text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 text/advance_delay=0.1
-text/autoadvance_per_character_delay=0.1
+text/autoadvance_per_character_delay=0.05
 text/autoadvance_ignored_characters_enabled=true
 animations/join_default_length=0.5
 animations/leave_default_length=0.5
@@ -61,7 +63,7 @@ text/autopauses={}
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godot-rapier2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/godot-rapier2d/plugin.cfg")
 
 [global_group]
 
