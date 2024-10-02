@@ -168,7 +168,6 @@ func _physics_process(delta: float) -> void:
 	elif heldobject is RigidBody2D:
 		heldobject.reset_physics_interpolation()
 		heldobject.set_global_position(Vector2(facingdir*-210, 50) + self.get_global_position())
-	print(Dialogic.VAR.HeldObject)
 	##animations
 	##if abs(velocity.x) > 5 && stance == 1 && $AnimationPlayer.current_animation != &"walk":
 	##	$AnimationPlayer.play(&"walk")

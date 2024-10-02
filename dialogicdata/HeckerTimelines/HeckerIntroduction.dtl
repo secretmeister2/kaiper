@@ -1,7 +1,10 @@
+[signal arg="heckerid_Hello"]
 hecker: Oh, hello there.
 if {HeldObject} == "HeckerFocus":
 	# #if kaiper is holding the focus
-	hecker: I lost my-[aa=0.25]
+	[signal arg="heckerid_HeldLost"]
+	hecker: I lost my-[aa=0.5]
+	[signal arg="heckerid_HeldFocus"]
 	hecker: Oh! Thats my spell focus... can I have it back? Its really important to me...
 	if {HeldObject} != "HeckerFocus":
 		jump HeckerIntroduction/Given
@@ -32,9 +35,12 @@ label Given (Given)
 # #signal my code to do something (like play an animation)
 hecker: Thank you! Would you like to come meet my friends?
 [end_timeline]
-label leave1
+label leaveHello
 hecker: Goodbye...
-label leave4
+[end_timeline]
+label leaveHeldLost
 hecker: Come back!
-label leave5
+[end_timeline]
+label leaveHeldFocus
 hecker: BRING IT BACK!
+[end_timeline]
