@@ -1,0 +1,40 @@
+hecker: Oh, hello there.
+if {HeldObject} == "HeckerFocus":
+	# #if kaiper is holding the focus
+	hecker: I lost my-[aa=0.25]
+	hecker: Oh! Thats my spell focus... can I have it back? Its really important to me...
+	if {HeldObject} != "HeckerFocus":
+		jump HeckerIntroduction/Given
+	# #If kaiper is NO LONGER holding the focus, implying he dropped it, go to the dialogue for that
+	else:
+		[wait time="0.5"]
+		if {HeldObject} != "HeckerFocus":
+			jump HeckerIntroduction/Given
+		else:
+			hecker: Please?
+			[wait time="1.0"]
+			if {HeldObject} != "HeckerFocus":
+				jump HeckerIntroduction/Given
+			else:
+				hecker: Fine then! Keep it for all I care...
+elif {HeldObject} == "none":
+# #If kaiper is holding nothing, hecker asks him to get the focus
+hecker: I lost my spell focus... would you mind looking around for one? I would really appreciate it.
+set {Hecker.HeckerTimeline} = "WaitingForFocus"
+# #Sets this variable so that in the future conversation start with hecker waiting for kaiper
+[wait time="1.0"]
+hecker: I think its over to the left...
+[wait time="1.5"]
+hecker: What are you waiting for?
+[end_timeline]
+label Given (Given)
+[signal arg="heckerpickupfocus"]
+# #signal my code to do something (like play an animation)
+hecker: Thank you! Would you like to come meet my friends?
+[end_timeline]
+label leave1
+hecker: Goodbye...
+label leave4
+hecker: Come back!
+label leave5
+hecker: BRING IT BACK!

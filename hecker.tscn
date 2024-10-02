@@ -17,6 +17,7 @@ collision_mask = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KaiperDetect"]
 position = Vector2(25, -18)
-polygon = PackedVector2Array(823, 58, 823, 321, -691, 313, -690, 50)
+polygon = PackedVector2Array(819, -292, 823, 321, -830, 320, -830, -303)
 
 [connection signal="body_entered" from="KaiperDetect" to="." method="KaiperEntered"]
+[connection signal="body_exited" from="KaiperDetect" to="." method="KaiperExit"]

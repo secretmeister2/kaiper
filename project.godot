@@ -30,13 +30,14 @@ directories/dch_directory={
 "hecker": "res://dialogicdata/hecker.dch"
 }
 directories/dtl_directory={
-"heckertest": "res://dialogicdata/heckertest.dtl"
+"HeckerIntroduction": "res://dialogicdata/HeckerTimelines/HeckerIntroduction.dtl",
+"WaitingForFocus": "res://dialogicdata/HeckerTimelines/WaitingForFocus.dtl"
 }
 layout/style_list=["res://bubbletext.tres"]
 layout/default_style="res://bubbletext.tres"
 variables={
 "Hecker": {
-"HeckerWaitingForFocus": false
+"HeckerTimeline": "HeckerIntroduction"
 },
 "HeldObject": ""
 }

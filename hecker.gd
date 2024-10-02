@@ -12,5 +12,11 @@ func _process(_delta: float) -> void:
 
 func KaiperEntered(_body: Node2D) -> void:
 	if Dialogic.current_timeline == null:
-		var layout = Dialogic.start("heckertest")
+		var layout = Dialogic.start(Dialogic.VAR.Hecker.HeckerTimeline)
 		layout.register_character(load("res://dialogicdata/hecker.dch"), self)
+
+func KaiperExit(body: Node2D) -> void:
+	var CurrIndex = Dialogic.current_event_idx
+	Dialogic.end_timeline()
+	var layout = Dialogic.start(Dialogic.VAR.Hecker.HeckerTimeline, "leave"+ str(CurrIndex))
+	layout.register_character(load("res://dialogicdata/hecker.dch"), self)

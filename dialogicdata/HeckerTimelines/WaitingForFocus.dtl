@@ -1,0 +1,4 @@
+if {HeldObject} != "HeckerFocus":
+	hecker: Oh, did you not manage to find it?
+else:
+	hecker: Thank you! Could you bring it here?
