@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("moveright")&& is_on_floor():
 		velocity.x += speed * 4
 		velocity.x = velocity.x * (1-(0.5/friction))
-	else: 
+	else:
 		if is_on_floor():
 			velocity.x = velocity.x  * (1-(1/friction))
 ##Gravity	
@@ -63,13 +63,13 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		velocity.y = 0
 ##Stance Management
-	if Input.is_action_just_pressed("up") && stance=="normal" && is_on_floor() && standtimer <= 0 && nostand.is_empty():
+	if Input.is_action_just_pressed("up") && stance=="normal" && is_on_floor() && standtimer <= 0 && not collidecheck($WalktoStandCollMon):
 		StanceSwap("stand")
-	elif Input.is_action_just_pressed("up") && stance=="crouch" && is_on_floor() && noupwalk.is_empty():
+	elif Input.is_action_just_pressed("up") && stance=="crouch" && is_on_floor() && not collidecheck($CrouchtoWalkCollMon):
 		StanceSwap("normal")
-	elif Input.is_action_just_pressed("down") && stance == "stand" && is_on_floor() && nodownwalk.is_empty():
+	elif Input.is_action_just_pressed("down") && stance == "stand" && is_on_floor() && not collidecheck($StandtoWalkCollMon):
 		StanceSwap("normal")
-	elif Input.is_action_just_pressed("down") && stance == "normal" && is_on_floor() && nocrouch.is_empty():
+	elif Input.is_action_just_pressed("down") && stance == "normal" && is_on_floor() && not collidecheck($WalktoCrouchCollMon):
 		StanceSwap("crouch")
 	if stance == "stand":
 		if standtimer == 100 && is_on_floor() && nodownwalk.is_empty():
@@ -77,15 +77,15 @@ func _physics_process(delta: float) -> void:
 		elif standtimer == 100:
 			standtimer=101
 	if standtimer > 0:
-		standtimer -= 1 
-	if stance != "stand" && Input.is_action_just_pressed("sit"):
+		standtimer -= 1
+	if stance != "stand" && Input.is_action_just_pressed("sit") && collidecheck($CrouchtoSitCollMon):
 		StanceSwap("sit")
-	if stance == "sit" && (Input.is_action_just_pressed("up")):
+	if stance == "sit" && (Input.is_action_just_pressed("up")) && collidecheck($SittoStandCollMon):
 		StanceSwap("normal")
 
 ##Jumping
 	if jumptimer > 0:
-		jumptimer -= 1 
+		jumptimer -= 1
 	if Input.is_action_pressed("jump") && stance == "stand" && is_on_floor() && jumptimer == 0:
 		velocity.y = -100 * vertjump
 		jumptimer=50
@@ -138,6 +138,7 @@ func _physics_process(delta: float) -> void:
 	##	$AnimationPlayer.play(&"walk")
 	##elif (stance != "normal" or abs(velocity.x) < 5):
 	##	$AnimationPlayer.stop()
+	
 func find(parent, type):
 	for child in parent.get_children():
 		if is_instance_of(child, type):
@@ -147,41 +148,13 @@ func find(parent, type):
 			return grandchild
 	return null
 
-func CrouchToWalkCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && not (body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
-		noupwalk.append(body)
-	if body is RigidBody2D:
-		noupwalk.append(body)
-func CrouchToWalkUncollides(body: Node2D) -> void:
-	while noupwalk.has(body):
-		noupwalk.erase(body)
-	
-func WalkToStandCollides(body: Node2D) -> void:
-	if not ((body.get_rotation_degrees()==0.0) && (find(body, CollisionPolygon2D).is_one_way_collision_enabled())):
-		nostand.append(body)
-	if body is RigidBody2D:
-		nostand.append(body)
-func WalkToStandUncollides(body: Node2D) -> void:
-	while nostand.has(body):
-		nostand.erase(body)
-
-func StandtoWalkCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && not (body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
-		nodownwalk.append(body)
-	if body is RigidBody2D:
-		nodownwalk.append(body)
-func StandtoWalkUncollides(body: Node2D) -> void:
-	while nodownwalk.has(body):
-		nodownwalk.erase(body)
-
-func WalkToCrouchCollides(body: Node2D) -> void:
-	if not (body.get_parent() is CharacterBody2D) && not (body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
-		nocrouch.append(body)
-	if body is RigidBody2D:
-		nocrouch.append(body)
-func WalktoCrouchUncollides(body: Node2D) -> void:
-	while nocrouch.has(body):
-		nocrouch.erase(body)
+func collidecheck(monitor: Area2D) -> bool:
+	for body in monitor.get_overlapping_bodies():
+		if not (body.get_parent() is CharacterBody2D) && not (body is CharacterBody2D) && not (body.get_rotation_degrees()==0.0 && find(body, CollisionPolygon2D).is_one_way_collision_enabled()):
+			return true
+		elif body is RigidBody2D:
+			return true
+	return false
 
 func StanceSwap(name: String):
 	stance = name
