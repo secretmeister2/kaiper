@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://wbu6iy6jocem"]
+[gd_scene load_steps=7 format=3 uid="uid://wbu6iy6jocem"]
 
 [ext_resource type="Script" path="res://kaiper.gd" id="1_otxy0"]
+[ext_resource type="Texture2D" uid="uid://bmsgheg05leay" path="res://gameassets/WalkingSprite.png" id="2_2lt3k"]
 [ext_resource type="Texture2D" uid="uid://cugjok5dpxpb0" path="res://gameassets/StandingSprite.png" id="2_oub11"]
 
 [sub_resource type="Animation" id="Animation_ybqys"]
@@ -53,10 +54,17 @@ _data = {
 "walk": SubResource("Animation_gix2i")
 }
 
-[node name="Kaiper" type="CharacterBody2D"]
+[node name="Kaiper" type="CharacterBody2D" node_paths=PackedStringArray("collision_shapes")]
 collision_layer = 8
 collision_mask = 19
 script = ExtResource("1_otxy0")
+collision_shapes = [NodePath("normalPhysColl"), NodePath("standPhysColl"), NodePath("crouchPhysColl")]
+textures = {
+"crouch": ExtResource("2_2lt3k"),
+"normal": ExtResource("2_2lt3k"),
+"sit": ExtResource("2_2lt3k"),
+"stand": ExtResource("2_oub11")
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.7, 0.7)
@@ -72,17 +80,20 @@ libraries = {
 "": SubResource("AnimationLibrary_hhr4c")
 }
 
-[node name="NormalPhysColl" type="CollisionPolygon2D" parent="."]
+[node name="normalPhysColl" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-175, 4, -122, -40, -74, 52, 127, 88, 167, 231, -99.219, 231)
 
-[node name="StandPhysColl" type="CollisionPolygon2D" parent="."]
+[node name="standPhysColl" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-18, 231, -100, -167, -35, -218, 121, 231)
 disabled = true
 
-[node name="CrouchPhysColl" type="CollisionPolygon2D" parent="."]
+[node name="crouchPhysColl" type="CollisionPolygon2D" parent="."]
 position = Vector2(-48, 0)
 polygon = PackedVector2Array(-109, 231, -92, 113, 187, 120, 223, 231)
 disabled = true
+
+[node name="sitPhysColl" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-99, 231, -110, 89, -155, 72, -157, 33, -93, 20, 99, 173, 102, 231)
 
 [node name="LedgeGrab" type="Area2D" parent="."]
 
