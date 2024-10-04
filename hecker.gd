@@ -15,15 +15,13 @@ func KaiperEntered(_body: Node2D) -> void:
 		var layout = Dialogic.start(Dialogic.VAR.Hecker.HeckerTimeline)
 		layout.register_character(load("res://dialogicdata/hecker.dch"), self)
 
-var hecklatestline="Hello"
 
 func KaiperExit(body: Node2D) -> void:
-	Dialogic.end_timeline()
-	await get_tree().create_timer(0.1).timeout
-	var layout = Dialogic.start(Dialogic.VAR.Hecker.HeckerTimeline, "leave"+ hecklatestline)
-	layout.register_character(load("res://dialogicdata/hecker.dch"), self)
+	if Dialogic.current_timeline != null:
+		for event in Dialogic.current_timeline.events:
+			if event is DialogicLabelEvent && event.name == ("leave_"+Dialogic.VAR.LineID):
+				Dialogic.Jump.jump_to_label("leave_"+Dialogic.VAR.LineID)
 
 
 func _on_dialogic_signal(argument:String):
-	if argument.begins_with("heckerid_"):
-		hecklatestline=argument.lstrip("heckerid_")
+	pass

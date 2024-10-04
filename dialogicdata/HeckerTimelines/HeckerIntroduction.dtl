@@ -1,11 +1,11 @@
-[signal arg="heckerid_Hear"]
-hecker: -OF ALL THE flicker snicker shwick HOGWASH!  
+set {LineID} = "Hear"
+hecker: -OF ALL THE flicker snicker shwick HOGWASH!
 if {HeldObject} == "HeckerFocus":
 	# #if kaiper is holding the focus
-	[signal arg="heckerid_HeldLost"]
+	set {LineID} = "HeldScream"
 	hecker: OF ALL THE- [aa=0.5]
-	[signal arg="heckerid_HeldFocus"]
-	hecker: Oh! Thats my spell focus... with a dog...UH HEY, HERE BOY, DROP 
+	set {LineID} = "HeldDrop"
+	hecker: Oh! Thats my spell focus... with a dog...UH HEY, HERE BOY, DROP
 	if {HeldObject} != "HeckerFocus":
 		jump HeckerIntroduction/Given
 	# #If kaiper is NO LONGER holding the focus, implying he dropped it, go to the dialogue for that
@@ -19,41 +19,41 @@ if {HeldObject} == "HeckerFocus":
 			if {HeldObject} != "HeckerFocus":
 				jump HeckerIntroduction/Given
 			else:
-				hecker: You don't understand, I need that! 
+				hecker: You don't understand, I need that!
 elif {HeldObject} == "none":
 # #If kaiper is holding nothing, hecker asks him to get the focus
-hecker:  It's official, Hecker, your life is over. You just had to lose the one ball that makes you useful.
+hecker: It's official, Hecker, your life is over. You just had to lose the one ball that makes you useful.
 set {Hecker.HeckerTimeline} = "WaitingForFocus"
 # #Sets this variable so that in the future conversation start with hecker waiting for kaiper
 [wait time="1.5"]
 hecker: Now they're gonna think I'm useless, throw me out, then I'll have to go back to mom and then she'll be dissapointed..
 [wait time="2.0"]
-hecker: Urgh, this is a mess 
+hecker: Urgh, this is a mess
 if {} == "":
 	# How can I add that when he sits it interupts what he's saying? 
 	hecker: ...huh? Oh, hi dog...you wouldn't happen to know where an unruly blue ball shaked orb is?
 	[wait time="2.0"]
-	hecker: What am I even saying, you're a dog. You can't understand me!  
+	hecker: What am I even saying, you're a dog. You can't understand me!
 	[wait time="1.0"]
-	hecker: ...I'm Hecker..your star pattern there on your eye is pretty snazzy there. Reminds me of what home is supposed to be. For me, that is. I don't know where you came from. Someone's probably missing you, huh? When I find my focus I can maybe help you. 
+	hecker: ...I'm Hecker..your star pattern there on your eye is pretty snazzy there. Reminds me of what home is supposed to be. For me, that is. I don't know where you came from. Someone's probably missing you, huh? When I find my focus I can maybe help you.
 	[wait time="1.0"]
 	hecker: Who am I kidding that's an IF statement.
 [end_timeline]
 label Given (Given)
 [signal arg="heckerpickupfocus"]
 # #signal my code to do something (like play an animation)
-hecker: THAT'S IT, OH THANK THE STARS. You, doggo, are the best dog out there! 
+hecker: THAT'S IT, OH THANK THE STARS. You, doggo, are the best dog out there!
 [signal arg="Hecker walk/run away "]
 # If Kaiper gave spell focus right away without Hecker having to ask a bunch 
 hecker: Seeya Buddy!!
 [end_timeline]
-label leaveHello
+label leave_Hello
 hecker: Goodbye...
 [end_timeline]
-label leaveHeldLost
+label leave_HeldScream
 hecker: Come back!
 [end_timeline]
-label leaveHeldFocus
-hecker: HEY! THAT'S MINE! HEEL BOY HEEL! 
+label leave_HeldDrop
+hecker: HEY! THAT'S MINE! HEEL BOY HEEL!
 # Que Hecker following Kaiper 
 [end_timeline]

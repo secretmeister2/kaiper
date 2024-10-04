@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://wbu6iy6jocem"]
+[gd_scene load_steps=8 format=3 uid="uid://wbu6iy6jocem"]
 
 [ext_resource type="Script" path="res://kaiper.gd" id="1_otxy0"]
 [ext_resource type="Texture2D" uid="uid://bmsgheg05leay" path="res://gameassets/WalkingSprite.png" id="2_2lt3k"]
 [ext_resource type="Texture2D" uid="uid://cugjok5dpxpb0" path="res://gameassets/StandingSprite.png" id="2_oub11"]
+[ext_resource type="Texture2D" uid="uid://brir7xy7tohr" path="res://gameassets/SitSprite.png" id="3_n6tnt"]
 
 [sub_resource type="Animation" id="Animation_ybqys"]
 length = 0.001
@@ -62,7 +63,7 @@ collision_shapes = [NodePath("normalPhysColl"), NodePath("standPhysColl"), NodeP
 textures = {
 "crouch": ExtResource("2_2lt3k"),
 "normal": ExtResource("2_2lt3k"),
-"sit": ExtResource("2_2lt3k"),
+"sit": ExtResource("3_n6tnt"),
 "stand": ExtResource("2_oub11")
 }
 
@@ -84,10 +85,12 @@ libraries = {
 polygon = PackedVector2Array(-175, 4, -122, -40, -74, 52, 127, 88, 167, 231, -99.219, 231)
 
 [node name="standPhysColl" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-18, 231, -100, -167, -35, -218, 121, 231)
 disabled = true
 
 [node name="crouchPhysColl" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(-48, 0)
 polygon = PackedVector2Array(-109, 231, -92, 113, 187, 120, 223, 231)
 disabled = true
@@ -119,6 +122,7 @@ polygon = PackedVector2Array(-494, 242, -532, 136, -480, 91, -429, 179, -227, 22
 disabled = true
 
 [node name="StandtoWalkCollMon" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 19
 
@@ -131,6 +135,7 @@ position = Vector2(346, 0)
 polygon = PackedVector2Array(-276, 79, -215, 87, -181, 231, -223, 231)
 
 [node name="WalktoStandCollMon" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 19
 
@@ -138,6 +143,7 @@ collision_mask = 19
 polygon = PackedVector2Array(-56, 48, -100, -166, -36, -215, 68, 76)
 
 [node name="WalktoCrouchCollMon" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 19
 
@@ -146,6 +152,7 @@ position = Vector2(-330, 0)
 polygon = PackedVector2Array(170, 231, 225, 231, 189, 119)
 
 [node name="CrouchtoSitCollMon" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 19
 
@@ -153,6 +160,7 @@ collision_mask = 19
 polygon = PackedVector2Array(-110, 113, -112, 90, -159, 71, -161, 31, -97, 18, 40, 117)
 
 [node name="SittoStandCollMon" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 19
 

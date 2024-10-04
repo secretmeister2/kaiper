@@ -39,7 +39,8 @@ variables={
 "Hecker": {
 "HeckerTimeline": "HeckerIntroduction"
 },
-"HeldObject": ""
+"HeldObject": "",
+"LineID": ""
 }
 glossary/default_case_sensitive=true
 text/letter_speed=0.01

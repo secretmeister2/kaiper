@@ -78,11 +78,12 @@ func _physics_process(delta: float) -> void:
 			standtimer=101
 	if standtimer > 0:
 		standtimer -= 1
-	if stance != "stand" && Input.is_action_just_pressed("sit") && collidecheck($CrouchtoSitCollMon):
+	if stance != "stand" && Input.is_action_just_pressed("sit") && not collidecheck($CrouchtoSitCollMon):
 		StanceSwap("sit")
-	if stance == "sit" && (Input.is_action_just_pressed("up")) && collidecheck($SittoStandCollMon):
+		$KaiperSprite.set_scale(Vector2(0.20, 0.20))
+	if stance == "sit" && (Input.is_action_just_pressed("up")) && not collidecheck($SittoStandCollMon):
 		StanceSwap("normal")
-
+		$KaiperSprite.set_scale(Vector2(0.18, 0.18))
 ##Jumping
 	if jumptimer > 0:
 		jumptimer -= 1
@@ -171,10 +172,15 @@ func StanceSwap(name: String):
 	if name == "stand":
 		standtimer = 300
 		$KaiperSprite.set_rotation_degrees(35)
-		$KaiperSprite.set_offset(Vector2(0, 60))
+		$KaiperSprite.set_offset(Vector2(0, 0))
 	else:
 		standtimer -= 150
 		$KaiperSprite.set_rotation_degrees(0)
-		$KaiperSprite.set_offset(Vector2(0, 450))
+		$KaiperSprite.set_offset(Vector2(0, 390))
 
+func dialogueInterrupt(type:String):
+	if Dialogic.current_timeline != null:
+		for event in Dialogic.current_timeline.events:
+			if event is DialogicLabelEvent && event.name == (type+"_"+Dialogic.VAR.LineID):
+				Dialogic.Jump.jump_to_label(type+"_"+Dialogic.VAR.LineID)
 ##NOTES FOR WHAT DO NEXT: Ledge grab, fix landing on one ways
