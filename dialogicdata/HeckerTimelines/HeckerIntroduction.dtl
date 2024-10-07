@@ -38,7 +38,7 @@ label sit_Bemoan
 # How can I add that when he sits it interupts what he's saying? 
 # Like this! The labels above. So here, now if hecker sits while the current line id is one of the above, it'll teleport to here
 set {LineID} = "Where"
-hecker: ...huh? Oh, hi dog...you wouldn't happen to know where an unruly blue ball shaked orb is?
+hecker: ...huh? Oh, hi dog...you wouldn't happen to know where an unruly blue ball-shaped orb is?
 [wait time="2.0"]
 hecker: What am I even saying, you're a dog. You can't understand me!
 [wait time="1.0"]
@@ -53,7 +53,7 @@ hecker: THAT'S IT, OH THANK THE STARS. You, doggo, are the best dog out there!
 [signal arg="Hecker walk/run away "]
 # If Kaiper gave spell focus right away without Hecker having to ask a bunch 
 if {Hecker.HeckerAnnoyed} == false:
-	hecker: Seeya Buddy!!
+	hecker: See ya Buddy!!
 [end_timeline]
 label leave_Hello
 hecker: Goodbye...

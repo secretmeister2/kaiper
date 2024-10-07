@@ -6,15 +6,15 @@ func ready() -> void:
 
 @export var collision_shapes: Array[CollisionPolygon2D]
 
-var stancespeeds = {"crouch":5, "normal":10, "stand":5, "sit":0}
+@export var stancespeeds = {"crouch":5, "normal":10, "stand":5, "sit":0}
 
-var runspeed = 20
+@export var runspeed = 20
 
-var horizjumpmult = 2
-var horizjumpvert = 8
-var vertjump = 13
+@export var horizjumpmult = 2
+@export var horizjumpvert = 8
+@export var vertjump = 13
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var friction = 10.0
+@export var friction = 10.0
 
 var stance = "normal"
 var speed = stancespeeds["normal"]
