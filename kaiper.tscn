@@ -96,7 +96,69 @@ polygon = PackedVector2Array(-109, 231, -92, 113, 187, 120, 223, 231)
 disabled = true
 
 [node name="sitPhysColl" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-99, 231, -110, 89, -155, 72, -157, 33, -93, 20, 99, 173, 117, 231)
+
+[node name="CollMons" type="Node2D" parent="."]
+
+[node name="CrouchtoWalkCollMon" type="Area2D" parent="CollMons"]
+visible = false
+collision_layer = 8
+collision_mask = 19
+
+[node name="CrouchtoWalk" type="CollisionPolygon2D" parent="CollMons/CrouchtoWalkCollMon"]
+position = Vector2(354, -133)
+polygon = PackedVector2Array(-494, 242, -532, 136, -480, 91, -429, 179, -227, 222, -222, 248, -450, 242)
+disabled = true
+
+[node name="StandtoWalkCollMon" type="Area2D" parent="CollMons"]
+visible = false
+collision_layer = 8
+collision_mask = 19
+
+[node name="StandtoWalk" type="CollisionPolygon2D" parent="CollMons/StandtoWalkCollMon"]
+position = Vector2(-3, -2)
+polygon = PackedVector2Array(-179, 4, -126, -44, -75, 43, -120, 183)
+
+[node name="StandtoWalk2" type="CollisionPolygon2D" parent="CollMons/StandtoWalkCollMon"]
+position = Vector2(346, 0)
+polygon = PackedVector2Array(-276, 79, -215, 87, -181, 231, -223, 231)
+
+[node name="WalktoStandCollMon" type="Area2D" parent="CollMons"]
+visible = false
+collision_layer = 8
+collision_mask = 19
+
+[node name="WalktoStand" type="CollisionPolygon2D" parent="CollMons/WalktoStandCollMon"]
+polygon = PackedVector2Array(-56, 48, -100, -166, -36, -215, 68, 76)
+
+[node name="WalktoCrouchCollMon" type="Area2D" parent="CollMons"]
+visible = false
+collision_layer = 8
+collision_mask = 19
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollMons/WalktoCrouchCollMon"]
+position = Vector2(-330, 0)
+polygon = PackedVector2Array(170, 231, 225, 231, 189, 119)
+
+[node name="CrouchtoSitCollMon" type="Area2D" parent="CollMons"]
+visible = false
+collision_layer = 8
+collision_mask = 19
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollMons/CrouchtoSitCollMon"]
+polygon = PackedVector2Array(-110, 113, -112, 90, -159, 71, -161, 31, -97, 18, 40, 117)
+
+[node name="SittoStandCollMon" type="Area2D" parent="CollMons"]
+visible = false
+collision_layer = 8
+collision_mask = 19
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollMons/SittoStandCollMon"]
+polygon = PackedVector2Array(-174, 30, -174, 3, -123, -39, -96, 11)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="CollMons/SittoStandCollMon"]
+polygon = PackedVector2Array(-35, 58, 125, 90, 170, 225, 118, 226, 106, 165)
 
 [node name="LedgeGrab" type="Area2D" parent="."]
 
@@ -105,6 +167,7 @@ position = Vector2(33, 174)
 polygon = PackedVector2Array(-86, -127, -145, -131, -145, -97, -84, -95)
 
 [node name="PickupArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 6
 
@@ -112,62 +175,34 @@ collision_mask = 6
 position = Vector2(-72, -7)
 polygon = PackedVector2Array(-164, 171, -166, 225, -101, 225, -100, 171)
 
-[node name="CrouchtoWalkCollMon" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 19
-
-[node name="CrouchtoWalk" type="CollisionPolygon2D" parent="CrouchtoWalkCollMon"]
-position = Vector2(354, -133)
-polygon = PackedVector2Array(-494, 242, -532, 136, -480, 91, -429, 179, -227, 222, -222, 248, -450, 242)
-disabled = true
-
-[node name="StandtoWalkCollMon" type="Area2D" parent="."]
+[node name="CloseNPCDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
-collision_mask = 19
+collision_mask = 128
 
-[node name="StandtoWalk" type="CollisionPolygon2D" parent="StandtoWalkCollMon"]
-position = Vector2(-3, -2)
-polygon = PackedVector2Array(-179, 4, -126, -44, -75, 43, -120, 183)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CloseNPCDetector"]
+polygon = PackedVector2Array(-286, 226, 306, 236, 282, -195, -308, -202)
 
-[node name="StandtoWalk2" type="CollisionPolygon2D" parent="StandtoWalkCollMon"]
-position = Vector2(346, 0)
-polygon = PackedVector2Array(-276, 79, -215, 87, -181, 231, -223, 231)
-
-[node name="WalktoStandCollMon" type="Area2D" parent="."]
+[node name="MediumNPCDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
-collision_mask = 19
+collision_mask = 128
 
-[node name="WalktoStand" type="CollisionPolygon2D" parent="WalktoStandCollMon"]
-polygon = PackedVector2Array(-56, 48, -100, -166, -36, -215, 68, 76)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MediumNPCDetector"]
+polygon = PackedVector2Array(-700, 237, 704, 226, 704, -347, -709, -341)
 
-[node name="WalktoCrouchCollMon" type="Area2D" parent="."]
+[node name="FarNPCDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
-collision_mask = 19
+collision_mask = 256
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WalktoCrouchCollMon"]
-position = Vector2(-330, 0)
-polygon = PackedVector2Array(170, 231, 225, 231, 189, 119)
-
-[node name="CrouchtoSitCollMon" type="Area2D" parent="."]
-visible = false
-collision_layer = 8
-collision_mask = 19
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CrouchtoSitCollMon"]
-polygon = PackedVector2Array(-110, 113, -112, 90, -159, 71, -161, 31, -97, 18, 40, 117)
-
-[node name="SittoStandCollMon" type="Area2D" parent="."]
-visible = false
-collision_layer = 8
-collision_mask = 19
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SittoStandCollMon"]
-polygon = PackedVector2Array(-174, 30, -174, 3, -123, -39, -96, 11)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="SittoStandCollMon"]
-polygon = PackedVector2Array(-35, 58, 125, 90, 170, 225, 118, 226, 106, 165)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FarNPCDetector"]
+polygon = PackedVector2Array(-1316, 233, 1238, 209, 1243, -718, -1319, -730)
 
 [connection signal="body_entered" from="PickupArea" to="." method="ObjectInPickupArea"]
+[connection signal="body_entered" from="CloseNPCDetector" to="." method="NPCStart"]
+[connection signal="area_entered" from="MediumNPCDetector" to="." method="NPCStart"]
+[connection signal="area_exited" from="MediumNPCDetector" to="." method="MedNPCLeave"]
+[connection signal="body_entered" from="MediumNPCDetector" to="." method="NPCStart"]
+[connection signal="body_exited" from="MediumNPCDetector" to="." method="MedNPCLeave"]
+[connection signal="body_entered" from="FarNPCDetector" to="." method="NPCStart"]

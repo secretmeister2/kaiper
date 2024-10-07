@@ -27,7 +27,7 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
-"hecker": "res://dialogicdata/hecker.dch"
+"hecker": "res://dialogicdata/Hecker.dch"
 }
 directories/dtl_directory={
 "HeckerIntroduction": "res://dialogicdata/HeckerTimelines/HeckerIntroduction.dtl",
@@ -37,9 +37,10 @@ layout/style_list=["res://bubbletext.tres"]
 layout/default_style="res://bubbletext.tres"
 variables={
 "Hecker": {
+"HeckerAnnoyed": false,
 "HeckerTimeline": "HeckerIntroduction"
 },
-"HeldObject": "",
+"HeldObject": "none",
 "LineID": ""
 }
 glossary/default_case_sensitive=true
@@ -139,6 +140,9 @@ sit={
 2d_physics/layer_4="Player"
 2d_physics/layer_5="Enemies"
 2d_physics/layer_6="OneWayFloors"
+2d_physics/layer_7="CloseNPCs"
+2d_physics/layer_8="MediumNPC"
+2d_physics/layer_9="FarNPC"
 
 [physics]
 

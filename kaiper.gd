@@ -56,20 +56,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		if is_on_floor():
 			velocity.x = velocity.x  * (1-(1/friction))
-##Gravity	
+##Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		velocity.x = velocity.x * 0.995
 	if is_on_floor():
 		velocity.y = 0
 ##Stance Management
-	if Input.is_action_just_pressed("up") && stance=="normal" && is_on_floor() && standtimer <= 0 && not collidecheck($WalktoStandCollMon):
+	if Input.is_action_just_pressed("up") && stance=="normal" && is_on_floor() && standtimer <= 0 && not collidecheck($CollMons/WalktoStandCollMon):
 		StanceSwap("stand")
-	elif Input.is_action_just_pressed("up") && stance=="crouch" && is_on_floor() && not collidecheck($CrouchtoWalkCollMon):
+	elif Input.is_action_just_pressed("up") && stance=="crouch" && is_on_floor() && not collidecheck($CollMons/CrouchtoWalkCollMon):
 		StanceSwap("normal")
-	elif Input.is_action_just_pressed("down") && stance == "stand" && is_on_floor() && not collidecheck($StandtoWalkCollMon):
+	elif Input.is_action_just_pressed("down") && stance == "stand" && is_on_floor() && not collidecheck($CollMons/StandtoWalkCollMon):
 		StanceSwap("normal")
-	elif Input.is_action_just_pressed("down") && stance == "normal" && is_on_floor() && not collidecheck($WalktoCrouchCollMon):
+	elif Input.is_action_just_pressed("down") && stance == "normal" && is_on_floor() && not collidecheck($CollMons/WalktoCrouchCollMon):
 		StanceSwap("crouch")
 	if stance == "stand":
 		if standtimer == 100 && is_on_floor() && nodownwalk.is_empty():
@@ -78,10 +78,11 @@ func _physics_process(delta: float) -> void:
 			standtimer=101
 	if standtimer > 0:
 		standtimer -= 1
-	if stance != "stand" && Input.is_action_just_pressed("sit") && not collidecheck($CrouchtoSitCollMon):
+	if stance != "stand" && Input.is_action_just_pressed("sit") && not collidecheck($CollMons/CrouchtoSitCollMon):
 		StanceSwap("sit")
 		$KaiperSprite.set_scale(Vector2(0.20, 0.20))
-	if stance == "sit" && (Input.is_action_just_pressed("up")) && not collidecheck($SittoStandCollMon):
+		dialogueInterrupt("sit")
+	if stance == "sit" && (Input.is_action_just_pressed("up")) && not collidecheck($CollMons/SittoStandCollMon):
 		StanceSwap("normal")
 		$KaiperSprite.set_scale(Vector2(0.18, 0.18))
 ##Jumping
@@ -182,5 +183,15 @@ func dialogueInterrupt(type:String):
 	if Dialogic.current_timeline != null:
 		for event in Dialogic.current_timeline.events:
 			if event is DialogicLabelEvent && event.name == (type+"_"+Dialogic.VAR.LineID):
+				Dialogic.current_timeline.get_event(Dialogic.current_event_idx).finish()
 				Dialogic.Jump.jump_to_label(type+"_"+Dialogic.VAR.LineID)
 ##NOTES FOR WHAT DO NEXT: Ledge grab, fix landing on one ways
+
+func NPCStart(body: Node2D) -> void:
+	var name = body.displayname
+	if Dialogic.current_timeline == null:
+		var layout = Dialogic.start(Dialogic.VAR.get(name).get("%sTimeline" % name))
+		layout.register_character(load("res://dialogicdata/%s.dch"%name), body)
+
+func NPCLeave(body: Node2D) -> void:
+	dialogueInterrupt("leave")
