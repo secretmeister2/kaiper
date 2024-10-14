@@ -1,14 +1,25 @@
-extends Control
-
-
-# Called when the node enters the scene tree for the first time.
+extends Node
 func _ready() -> void:
-	pass # Replace with function body.
+	$World.hide()
+	$World/TestLevel/Kaiper/Camera2D.enabled = false
+	$PauseMenu.hide()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
+	if Input.is_action_just_pressed("pause"):
+		if self.get_tree().paused==false:
+			self.get_tree().paused=true
+			$World.hide()
+			$World/TestLevel/Kaiper/Camera2D.enabled = false
+		else:
+			self.get_tree().paused=false
+			$World.show()
 func teststart() -> void:
-	pass
+	$World/TestLevel.process_mode=PROCESS_MODE_INHERIT
+	$World.show()
+	$MainMenu.hide()
+	$PauseMenu.show()
+func MainMenuButton() -> void:
+	$World.hide()
+	$MainMenu.show()
+	$PauseMenu.hide()
+	self.get_tree().paused=true

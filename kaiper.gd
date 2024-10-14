@@ -7,7 +7,6 @@ func ready() -> void:
 @export var collision_shapes: Array[CollisionPolygon2D]
 
 @export var stancespeeds = {"crouch":5, "normal":10, "stand":5, "sit":0}
-
 @export var runspeed = 20
 
 @export var horizjumpmult = 2
@@ -36,10 +35,11 @@ var noupwalk = []
 var nodownwalk = []
 var nocrouch = []
 var colls =[]
+
 ##var animation = &"Idle"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-
+	$Camera2D.enabled=true
 	if Input.is_action_pressed("sprint") && stance == "normal":
 		speed = runspeed
 	elif stance == "normal":

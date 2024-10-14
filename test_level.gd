@@ -1,13 +1,13 @@
 extends Node2D
 
 func walkspeedchanged(value: float) -> void:
-	$Kaiper.walkspeed=value
+	$Kaiper.stancespeeds["normal"]=value
 
 func runspeedchanged(value: float) -> void:
 	$Kaiper.runspeed=value
 
 func standspeedchanged(value: float) -> void:
-	$Kaiper.standspeed=value
+	$Kaiper.stancespeeds["standing"]=value
 
 func horzjumpmultchanged(value: float) -> void:
 	$Kaiper.horizjumpmult=value
