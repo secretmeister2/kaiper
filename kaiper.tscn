@@ -59,7 +59,7 @@ _data = {
 collision_layer = 8
 collision_mask = 19
 script = ExtResource("1_otxy0")
-collision_shapes = [NodePath("normalPhysColl"), NodePath("standPhysColl"), NodePath("crouchPhysColl")]
+collision_shapes = [NodePath("normalPhysColl"), NodePath("standPhysColl"), NodePath("crouchPhysColl"), NodePath("sitPhysColl")]
 textures = {
 "crouch": ExtResource("2_2lt3k"),
 "normal": ExtResource("2_2lt3k"),
@@ -85,18 +85,15 @@ libraries = {
 polygon = PackedVector2Array(-175, 4, -122, -40, -74, 52, 127, 88, 167, 231, -99.219, 231)
 
 [node name="standPhysColl" type="CollisionPolygon2D" parent="."]
-visible = false
 polygon = PackedVector2Array(-18, 231, -100, -167, -35, -218, 121, 231)
 disabled = true
 
 [node name="crouchPhysColl" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-48, 0)
 polygon = PackedVector2Array(-109, 231, -92, 113, 187, 120, 223, 231)
 disabled = true
 
 [node name="sitPhysColl" type="CollisionPolygon2D" parent="."]
-visible = false
 polygon = PackedVector2Array(-99, 231, -110, 89, -155, 72, -157, 33, -93, 20, 99, 173, 117, 231)
 
 [node name="CollMons" type="Node2D" parent="."]
@@ -200,6 +197,7 @@ collision_mask = 256
 polygon = PackedVector2Array(-1316, 233, 1238, 209, 1243, -718, -1319, -730)
 
 [connection signal="body_entered" from="PickupArea" to="." method="ObjectInPickupArea"]
+[connection signal="area_entered" from="CloseNPCDetector" to="." method="NPCStart"]
 [connection signal="body_entered" from="CloseNPCDetector" to="." method="NPCStart"]
 [connection signal="area_entered" from="MediumNPCDetector" to="." method="NPCStart"]
 [connection signal="area_exited" from="MediumNPCDetector" to="." method="NPCLeave"]
